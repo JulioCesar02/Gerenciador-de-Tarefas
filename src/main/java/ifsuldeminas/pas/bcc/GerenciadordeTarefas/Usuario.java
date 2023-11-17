@@ -1,31 +1,63 @@
 package ifsuldeminas.pas.bcc.GerenciadordeTarefas;
 
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class Usuario {
-    private int ID;
-    private String Nome;
-    private String Email;
-    private String Senha;
-    private List<Tarefa> tarefas; // Relacionamento: Um usuário possui várias tarefas
-    private List<Calendario> eventos; // Relacionamento: Um usuário possui vários eventos em seu calendário
-    private List<Colaboracao> colaboracoes; // Relacionamento: Um usuário colabora em várias tarefas
-    private List<RelatorioProgresso> relatorios; // Relacionamento: Um usuário possui vários relatórios de progresso
-    private List<Notificacao> notificacoes; // Relacionamento: Um usuário recebe várias notificações
 
-    public Usuario(int ID, String Nome, String Email, String Senha) {
-        this.ID = ID;
-        this.Nome = Nome;
-        this.Email = Email;
-        this.Senha = Senha;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String nome;
+    private String email;
+    private String senha;
+
+    // Construtor vazio (necessário para JPA)
+    public Usuario() {
     }
 
-    public void adicionarTarefa(Tarefa tarefa) {
-        tarefas.add(tarefa);
+    // Construtor com parâmetros
+    public Usuario(String nome, String email, String senha) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
     }
 
-    public void receberNotificacao(Notificacao notificacao) {
-        notificacoes.add(notificacao);
+    // Getters e setters
+    public Long getId() {
+        return id;
     }
 
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    // Implementações adicionais conforme necessário
 }
+
+

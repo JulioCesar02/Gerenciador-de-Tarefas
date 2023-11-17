@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+
+    <persistence-unit name="GerenciadorDeTarefasPU">
+        <!-- Nome da classe do provedor Hibernate -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <!-- Caminho completo para o arquivo de configuração do Hibernate -->
+        <properties>
+            <property name="hibernate.archive.autodetection" value="class, hbm"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <!-- Outras propriedades de configuração do Hibernate -->
+
+            <!-- Caminho completo para o arquivo de configuração do Hibernate -->
+            <property name="hibernate.cfg.xml" value="classpath:/hibernate.cfg.xml"/>
+        </properties>
+    </persistence-unit>
+
+</persistence>
+
+

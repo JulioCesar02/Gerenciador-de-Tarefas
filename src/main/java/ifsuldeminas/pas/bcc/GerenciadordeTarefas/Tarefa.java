@@ -1,33 +1,124 @@
 package ifsuldeminas.pas.bcc.GerenciadordeTarefas;
 
+import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
-enum Prioridade {
-    ALTA, MEDIA, BAIXA
-}
-
+@Entity
 public class Tarefa {
-    private int ID;
-    private String Titulo;
-    private String Descricao;
-    private Date Prazo;
-    private Prioridade prioridade;
-    private Usuario proprietario; // Relacionamento: Uma tarefa pertence a um usuário (proprietário)
-    private Usuario colaborador; // Relacionamento: Uma tarefa pode ter um colaborador
-    private List<BackupRestauracao> backups; // Relacionamento: Uma tarefa está associada a vários backups/versões
 
-    public Tarefa(int ID, String Titulo, String Descricao, Date Prazo, Prioridade prioridade, Usuario proprietario, Usuario colaborador) {
-        this.ID = ID;
-        this.Titulo = Titulo;
-        this.Descricao = Descricao;
-        this.Prazo = Prazo;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String titulo;
+    private String descricao;
+    private Date prazo;
+
+    @Enumerated(EnumType.STRING)
+    private Prioridade prioridade;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    @ManyToOne
+    @JoinColumn(name = "proprietario_id")
+    private Usuario proprietario;
+
+    @ManyToOne
+    @JoinColumn(name = "colaborador_id")
+    private Usuario colaborador;
+
+    @ManyToOne
+    @JoinColumn(name = "calendario_id")
+    private Calendario calendario;
+
+    // Construtor vazio (necessário para JPA)
+    public Tarefa() {
+    }
+
+    // Construtor com parâmetros
+    public Tarefa(String titulo, String descricao, Date prazo, Prioridade prioridade, Status status,
+                  Usuario proprietario, Usuario colaborador, Calendario calendario) {
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.prazo = prazo;
         this.prioridade = prioridade;
+        this.status = status;
         this.proprietario = proprietario;
+        this.colaborador = colaborador;
+        this.calendario = calendario;
+    }
+
+    // Getters e setters
+    public Long getId() {
+        return id;
+    }
+
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Date getPrazo() {
+        return prazo;
+    }
+
+    public void setPrazo(Date prazo) {
+        this.prazo = prazo;
+    }
+
+    public Prioridade getPrioridade() {
+        return prioridade;
+    }
+
+    public void setPrioridade(Prioridade prioridade) {
+        this.prioridade = prioridade;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Usuario getProprietario() {
+        return proprietario;
+    }
+
+    public void setProprietario(Usuario proprietario) {
+        this.proprietario = proprietario;
+    }
+
+    public Usuario getColaborador() {
+        return colaborador;
+    }
+
+    public void setColaborador(Usuario colaborador) {
         this.colaborador = colaborador;
     }
 
+    public Calendario getCalendario() {
+        return calendario;
+    }
+
+    public void setCalendario(Calendario calendario) {
+        this.calendario = calendario;
+    }
+
+    // Implementações adicionais conforme necessário
 }
-
-
 
