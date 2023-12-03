@@ -57,7 +57,10 @@ public class Usuario {
         this.senha = senha;
     }
 
-    // Implementações adicionais conforme necessário
+    // Método adicional para validar credenciais de login
+    public boolean validarCredenciais(String email, String senha) {
+        return this.email.equals(email) && this.senha.equals(senha);
+    }
 }
 
 
